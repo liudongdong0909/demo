@@ -16,7 +16,6 @@ import java.util.List;
  * @version V1.0
  * @create 2018-03-13 上午 10:36
  */
-
 public abstract class BaseService<T extends BaseModel> {
 
     @Autowired
