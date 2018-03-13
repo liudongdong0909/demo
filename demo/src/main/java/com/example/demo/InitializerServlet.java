@@ -20,7 +20,6 @@ import java.sql.SQLException;
  */
 @Configuration
 @PropertySource(value = {"classpath:jdbc.properties"})
-@MapperScan(basePackages = {"com.example.demo.mapper"})
 @SpringBootApplication
 public class InitializerServlet extends SpringBootServletInitializer {
 

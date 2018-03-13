@@ -14,15 +14,4 @@ import java.util.List;
 @SpringBootTest
 public class DemoApplicationTests {
 
-	@Autowired
-	private TbUserService tbUserService;
-
-	@Test
-	public void test(){
-		TbUser tbUser = new TbUser();
-		tbUser.setUsername("zhangsan");
-		List<TbUser> tbUserList = tbUserService.queryListByWhere(tbUser);
-
-		tbUserList.stream().forEach((user) -> System.out.println(user.toString()));
-	}
 }
