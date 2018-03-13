@@ -1,14 +1,13 @@
 package com.example.demo;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import tk.mybatis.spring.annotation.MapperScan;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
@@ -37,6 +36,7 @@ public class InitializerServlet extends SpringBootServletInitializer {
     private String jdbcPassword;
 
     @Bean(destroyMethod = "close")
+    @Primary
     public DataSource dataSource() throws SQLException {
 
         DruidDataSource druidDataSource = new DruidDataSource();
@@ -60,6 +60,12 @@ public class InitializerServlet extends SpringBootServletInitializer {
         druidDataSource.setFilters("stat");
 
         return druidDataSource;
+    }
+
+    @Bean
+    @Primary
+    public DataSourceTransactionManager dataSourceTransactionManager () throws SQLException {
+        return new DataSourceTransactionManager(this.dataSource());
     }
 
     @Override
