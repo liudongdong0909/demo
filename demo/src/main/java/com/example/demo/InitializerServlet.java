@@ -5,8 +5,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import org.springframework.context.annotation.*;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.PropertySource;
 import tk.mybatis.spring.annotation.MapperScan;
 
 import javax.sql.DataSource;
@@ -60,12 +62,6 @@ public class InitializerServlet extends SpringBootServletInitializer {
         druidDataSource.setFilters("stat");
 
         return druidDataSource;
-    }
-
-    @Bean
-    @Primary
-    public DataSourceTransactionManager dataSourceTransactionManager () throws SQLException {
-        return new DataSourceTransactionManager(this.dataSource());
     }
 
     @Override
