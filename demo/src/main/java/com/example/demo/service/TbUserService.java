@@ -6,6 +6,7 @@ import com.example.demo.model.TbUser;
 import com.example.demo.service.base.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -24,4 +25,13 @@ public class TbUserService extends BaseService<TbUser> {
         return tbUserMapper.queryUserList(username);
     }
 
+    /**
+     * 动态保存用户
+     *
+     * @param tbUser {@link TbUser}
+     */
+    @Transactional(rollbackFor = {RuntimeException.class, Exception.class})
+    public void saveTbUser(TbUser tbUser) {
+        super.saveSelective(tbUser);
+    }
 }

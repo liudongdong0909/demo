@@ -10,11 +10,4 @@
         <setting name="mapUnderscoreToCamelCase" value="false"/>
     </settings>
 
-    <plugins>
-        <plugin interceptor="com.github.pagehelper.PageInterceptor">
-            <property name="helperDialect" value="mysql" />
-            <property name="rowBoundsWithCount" value="true" />
-            <property name="reasonable" value="true" />
-        </plugin>
-    </plugins>
 </configuration>
