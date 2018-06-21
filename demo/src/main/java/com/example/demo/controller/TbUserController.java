@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.model.TbUser;
 import com.example.demo.service.TbUserService;
+import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,12 @@ public class TbUserController {
     @GetMapping(value = "/list")
     public List<TbUser> queryList() {
         return tbUserService.queryAll();
+    }
+
+    @GetMapping(value = "/page/{pageNum}/{pageSize}")
+    public PageInfo<TbUser> queryPage(@PathVariable Integer pageNum, @PathVariable Integer pageSize){
+        PageInfo<TbUser> pageInfo = tbUserService.queryPageListByWhere(null, pageNum, pageSize);
+        return pageInfo;
     }
 
     @GetMapping(value = "/{userId}")

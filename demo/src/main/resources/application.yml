@@ -1,0 +1,15 @@
+server:
+  port: 80
+  servlet:
+    context-path: /
+pagehelper:
+  helper-dialect: mysql
+  row-bounds-with-count: true
+  reasonable: true
+logging:
+  level:
+    com.example.demo.mapper: debug
+spring:
+  output:
+    ansi:
+      enabled: always

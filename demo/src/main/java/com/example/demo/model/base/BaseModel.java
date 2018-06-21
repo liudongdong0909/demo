@@ -1,5 +1,7 @@
 package com.example.demo.model.base;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -10,23 +12,31 @@ import java.util.Date;
  */
 public class BaseModel{
 
-    private Date created;
+    private LocalDateTime created;
 
-    private Date updated;
+    private LocalDateTime updated;
 
-    public Date getCreated() {
+    public LocalDateTime getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(LocalDateTime created) {
         this.created = created;
     }
 
-    public Date getUpdated() {
+    public LocalDateTime getUpdated() {
         return updated;
     }
 
-    public void setUpdated(Date updated) {
+    public void setUpdated(LocalDateTime updated) {
         this.updated = updated;
+    }
+
+    @Override
+    public String toString() {
+        return "BaseModel{" +
+                "created=" + created +
+                ", updated=" + updated +
+                '}';
     }
 }

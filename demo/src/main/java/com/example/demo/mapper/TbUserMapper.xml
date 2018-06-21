@@ -8,7 +8,7 @@
           tb_user
         <where>
             <if test="username != null and !''.equals(username.trim())">
-                username LIKE '%' #{username} '%'
+                username LIKE concat('%', #{username}, '%')
             </if>
         </where>
 

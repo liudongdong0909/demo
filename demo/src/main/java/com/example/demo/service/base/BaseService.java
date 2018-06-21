@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.common.Mapper;
 import tk.mybatis.mapper.entity.Example;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -64,13 +66,13 @@ public abstract class BaseService<T extends BaseModel> {
      * 分页查询数据列表
      *
      * @param record 查询条件
-     * @param page   起始页
-     * @param rows   每页大小
+     * @param pageNum   起始页
+     * @param pageSize   每页大小
      * @return PageInfo<T>
      */
-    public PageInfo<T> queryPageListByWhere(T record, Integer page, Integer rows) {
+    public PageInfo<T> queryPageListByWhere(T record, Integer pageNum, Integer pageSize) {
         // 设置分页参数
-        PageHelper.startPage(page, rows);
+        PageHelper.startPage(pageNum, pageSize);
         // 执行查询
         List<T> list = this.mapper.select(record);
         // 返回分页结果
@@ -84,7 +86,7 @@ public abstract class BaseService<T extends BaseModel> {
      * @return int
      */
     public int save(T record) {
-        record.setCreated(new Date());
+        record.setCreated(LocalDateTime.now());
         record.setUpdated(record.getCreated());
         return this.mapper.insert(record);
     }
@@ -96,7 +98,7 @@ public abstract class BaseService<T extends BaseModel> {
      * @return int
      */
     public int saveSelective(T record) {
-        record.setCreated(new Date());
+        record.setCreated(LocalDateTime.now());
         record.setUpdated(record.getCreated());
         return this.mapper.insertSelective(record);
     }
@@ -108,7 +110,7 @@ public abstract class BaseService<T extends BaseModel> {
      * @return int
      */
     public int updateByPrimaryKey(T record) {
-        record.setUpdated(new Date());
+        record.setUpdated(LocalDateTime.now());
         ;
         return this.mapper.updateByPrimaryKey(record);
     }
@@ -120,7 +122,7 @@ public abstract class BaseService<T extends BaseModel> {
      * @return int
      */
     public int updateSelective(T record) {
-        record.setUpdated(new Date());
+        record.setUpdated(LocalDateTime.now());
         return this.mapper.updateByPrimaryKeySelective(record);
     }
 
