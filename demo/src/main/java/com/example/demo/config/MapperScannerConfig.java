@@ -21,7 +21,6 @@ public class MapperScannerConfig {
      */
     @Bean
     public MapperScannerConfigurer mapperScannerConfigurer() {
-
         MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
         mapperScannerConfigurer.setBasePackage("com.example.demo.mapper");
         return mapperScannerConfigurer;

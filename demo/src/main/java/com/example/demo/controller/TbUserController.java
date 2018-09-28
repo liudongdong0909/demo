@@ -6,9 +6,12 @@ import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * @author IT_donggua
@@ -26,6 +29,15 @@ public class TbUserController {
 
     @GetMapping(value = "/list")
     public List<TbUser> queryList() {
+
+        List<TbUser> tbUsers = tbUserService.queryAll();
+        tbUsers.sort(Comparator.comparing(TbUser::getUsername).reversed().thenComparing(TbUser::getId));
+
+        tbUsers.stream()
+                .filter(tbUser -> ! StringUtils.isEmpty(tbUser.getUsername()))
+                .sorted(Comparator.comparing(TbUser::getUsername).reversed().thenComparing(TbUser::getEmail).reversed())
+                .collect(Collectors.toMap(TbUser::getId, Function.identity(), (key1, key2) -> key2, LinkedHashMap::new));
+
         return tbUserService.queryAll();
     }
 
